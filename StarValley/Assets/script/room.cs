@@ -15,8 +15,23 @@ public class room:MonoBehaviour
     private List<GameObject> lockDoor = new List<GameObject>();
     private bool isBorn = false;
     public BoxCollider2D bc;
-    public enemy enemyToBorn;
-    public enemy enemyBToBorn;
+    public enemy enemy1;
+    public enemy enemy2;
+    public enemy enemy3;
+    public AstarPath ai;
+    private enemy enemyToBorn
+    {
+        get
+        {
+            int index = UnityEngine.Random.Range(0, 4);
+            if (index == 0)
+                return enemy1;
+            else if (index == 1)
+                return enemy2;
+            else
+                return enemy3;
+        }
+    }
     public Vector2 roomTriggerSize;
     private int enemyCount;
     private int enemyDie;
@@ -56,6 +71,7 @@ public class room:MonoBehaviour
             GameObject newDoor = Instantiate(door, item, Quaternion.identity);
             lockDoor.Add(newDoor);
         }
+        ai.Scan();
     }
 
     private void generateEnemy()

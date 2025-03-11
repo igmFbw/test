@@ -25,7 +25,6 @@ public class GameUI : MonoBehaviour
         gamePass.transform.Find("BtnReStart").GetComponent<Button>().onClick.AddListener(() =>
         {
             SceneManager.LoadScene(0);
-            global.resetData();
             Time.timeScale = 1;
         });
         gameLose.transform.Find("BtnReStart").GetComponent<Button>().onClick.AddListener(() =>
@@ -52,11 +51,11 @@ public class GameUI : MonoBehaviour
     }
     private void updateHp()
     {
-        hp.text = "HP:" + global.hp.ToString();
+        hp.text = ":" + global.hp.ToString();
     }
     private void updateCoin()
     {
-        coinCount.text = global.coinNum.ToString();
+        coinCount.text = ":" + global.coinNum.ToString();
     }
     private void OnDestroy()
     {

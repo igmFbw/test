@@ -8,6 +8,7 @@ public class chestTrigger : MonoBehaviour
     {
         if (collision.tag == "player")
         {
+            soundManager.instance.playChestOpen();
             Instantiate(hp,new Vector2(transform.position.x,transform.position.y+.5f), Quaternion.identity);
             Destroy(gameObject);
         }

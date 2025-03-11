@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     public room currentRoom;
     public Vector2 roomTriggerSize;
     private enemy enemyTarget;
+    public AudioSource audioPlayer;
+    public AudioClip hurtSound;
+    public AudioClip dieSound;
     [SerializeField] private hitEffect playerHitEffect;
     [SerializeField] private blood playerBloodEffect;
     [SerializeField] private LayerMask enemyLay;
@@ -84,9 +87,13 @@ public class Player : MonoBehaviour
     {
         hurtEffect();
         global.hp -= damage;
+        audioPlayer.clip = hurtSound;
+        audioPlayer.Play();
         if (global.hp < 0)
         {
             global.hp = 0;
+            audioPlayer.clip = dieSound;
+            audioPlayer.Play();
             GameUI.Instance.gameLose.SetActive(true);
             Time.timeScale = 0;
         }
