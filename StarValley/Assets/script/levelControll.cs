@@ -83,61 +83,45 @@ public class levelControll : MonoBehaviour
     private List<string> normalRoom1 = new List<string>()
     {
         "1111111ddd1111111",
-        "1  e            1",
+        "1               1",
         "1 11       e 11 1",
         "1 1           1 1",
-        "1      e        1",
+        "1               1",
         "d  e            d",
         "d       1       d",
         "d          e    d",
         "1   e           1",
         "1 1    e      1 1",
         "1 11         11 1",
-        "1       e       1",
+        "1               1",
         "1111111ddd1111111",
     };
     private List<string> normalRoom2 = new List<string>()
     {
         "1111111ddd1111111",
-        "1  e            1",
+        "1               1",
         "1          e    1",
         "1               1",
         "1       1       1",
-        "d     e 1     e d",
+        "d       1       d",
         "d     11111e    d",
         "d       1       d",
         "1   e   1       1",
         "1      e        1",
         "1               1",
-        "1           e   1",
+        "1               1",
         "1111111ddd1111111",
     };
     private List<string> normalRoom3 = new List<string>()
     {
         "1111111ddd1111111",
-        "1  e            1",
-        "1       11   e  1",
-        "1    1      1   1",
         "1               1",
-        "d   e           d",
-        "d               d",
-        "d   e      e    d",
+        "1       1  e    1",
         "1               1",
-        "1    1      1   1",
-        "1       11      1",
-        "1  e            1",
-        "1111111ddd1111111",
-    };
-    private List<string> normalRoom4 = new List<string>()
-    {
-        "1111111ddd1111111",
         "1               1",
-        "1   e   1  e    1",
-        "1               1",
-        "1      e        1",
         "d  e            d",
         "d  1         1  d",
-        "d    e     e    d",
+        "d          e    d",
         "1               1",
         "1   e           1",
         "1      e1       1",
@@ -148,15 +132,13 @@ public class levelControll : MonoBehaviour
     {
         get
         {
-            int index = UnityEngine.Random.Range(0, 5);
+            int index = UnityEngine.Random.Range(0, 4);
             if (index == 0)
                 return normalRoom1;
             else if (index == 1)
                 return normalRoom2;
-            else if (index == 2)
-                return normalRoom3;
             else
-                return normalRoom4;
+                return normalRoom3;
         }
     }
     private List<string> finalRoom = new List<string>()
@@ -201,7 +183,7 @@ public class levelControll : MonoBehaviour
     }
     private void Start()
     {   //虽然内存仍可优化，但是这一大段算法误动，误动，误动！！！！！
-        roomList = new List<roomNode>(); //BFS生成房间
+        /*List<roomNode>*/ roomList = new List<roomNode>(); //BFS生成房间
         Queue<roomNode> qu = new Queue<roomNode>();
         List<Vector2> locate = new List<Vector2>();
         qu.Enqueue(new roomNode()//房间节点

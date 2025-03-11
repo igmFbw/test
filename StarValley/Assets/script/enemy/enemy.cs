@@ -1,7 +1,5 @@
-using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 public class enemy : MonoBehaviour
 {
@@ -11,8 +9,6 @@ public class enemy : MonoBehaviour
         Shoot
     }
     public List<AudioClip> shootSound = new List<AudioClip>();
-    public AudioSource hurtSoundPlayer;
-    public AudioClip hurtSound;
     public AudioSource shootSoundPlayer;
     public States state = States.FollowPlayer;
     public float FollowPlayerSeconds;
@@ -25,13 +21,9 @@ public class enemy : MonoBehaviour
     [SerializeField] protected hitEffect enemyHitEffect;
     [SerializeField] protected blood enemyBloodEffect;
     [SerializeField] protected coin coinDrop;
-    [SerializeField] private AIDestinationSetter ai;
-    public corpse corpsePrefab;
-    public Sprite corseSprite;
     protected virtual void Start()
     {
-        FollowPlayerSeconds = Random.Range(1, 2.5f);
-        ai.target = global.player.transform;
+        FollowPlayerSeconds = Random.Range(2, 4f);
     }
     protected virtual void Update()
     {
@@ -53,13 +45,24 @@ public class enemy : MonoBehaviour
             {
                 sprite.flipX = true;
             }
-            //rb.velocity = dirctionToPlayer * 3;
+            rb.velocity = dirctionToPlayer * 3;
             CurrentSeconds += Time.deltaTime;
         }
         else if(state == States.Shoot)
         {
+            /*CurrentSeconds += Time.deltaTime;
+            if(CurrentSeconds > 1.0f)
+            {
+                state = States.FollowPlayer;
+                FollowPlayerSeconds = Random.Range(2, 4f);
+            }
+            if (Time.frameCount % 20 == 0)
+            {
+                rb.velocity = Vector3.zero;
+                shoot();
+            }*/
             shoot();
-            FollowPlayerSeconds = Random.Range(1, 2.5f);
+            FollowPlayerSeconds = Random.Range(2, 4f);
             state = States.FollowPlayer;
         }
     }
@@ -77,16 +80,9 @@ public class enemy : MonoBehaviour
     {
         hurtEffect();
         hp -= damage;
-        if (!hurtSoundPlayer.isPlaying)
-        {
-            hurtSoundPlayer.clip = hurtSound;
-            hurtSoundPlayer.Play();
-        }
         if (hp <= 0)
         {
             Destroy(gameObject);
-            corpse go = Instantiate(corpsePrefab, transform.position, Quaternion.identity);
-            go.setSprite(corseSprite);
             coin newCoin = objectPool.instance.getCoin("coin", coinDrop);
             newCoin.transform.position = transform.position;
             newCoin.setActive(true);

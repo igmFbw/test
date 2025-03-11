@@ -8,7 +8,6 @@ public class hpBag : MonoBehaviour
     {
         if(collision.tag == "player")
         {
-            soundManager.instance.playEatHp();
             Destroy(gameObject);
             global.hp++;
             global.HpChangeEvent();

@@ -29,8 +29,7 @@ public class basicGun : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         {
             currentBulletCount = bulletCount;
-            UpdateBulletUI();
-            soundManager.instance.playExchangeBullet();
+            UpdateBulletUI();       
         }
         shootTimer += Time.deltaTime;
         if (shootTimer >= shootCool)
@@ -89,7 +88,7 @@ public class basicGun : MonoBehaviour
     }
     protected virtual void UpdateBulletUI()
     {
-        GameUI.Instance.bulletCount.text = ":" + currentBulletCount.ToString()+"/"+bulletCount.ToString();
+        GameUI.Instance.bulletCount.text = currentBulletCount.ToString()+"/"+bulletCount.ToString();
     }
     private IEnumerator gunFireFx()
     {
